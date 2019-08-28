@@ -52,18 +52,23 @@ connection.connect(function (err) {
             if (err) throw err;
               for (result of results){
                 if(result.Total_Stock> quantity){
-                    var price = result.Price
+                    var price = result.Price*quantity
                      console.log("You're purchase is complete, thank you for your business! Your order total is $" + price);
                      var newStock = result.Total_Stock-quantity
-                     console.log(newStock)
-                    "UPDATE products SET Total_Stock  ='" + newStock + "'", 
-                     "WHERE ITEM_ID ='" + item + "'";
-                }else{
+                     connection.query("UPDATE products SET ? WHERE Item_ID = '" + item + "'", [
+                      {Total_Stock: newStock},
+                     ]
+                     , function (err, result) {
+                      if (err) throw err;
+                      // console.log(result.affectedRows + " record(s) updated");
+                    });
+
+                   }else
+                   {
                     console.log("Bummer, we don't have enough of that item in stock, please try a different quantity.")
                 }
             }
         })
     })
-    connection.end();
 }
  
