@@ -3,7 +3,6 @@ var mysql = require("mysql");
 var startTime = setTimeout(function() {
    start();
   }, 1000);
-
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -17,6 +16,7 @@ connection.connect(function (err) {
     afterConnection(startTime);
    
  });
+
 
  function afterConnection() {
     connection.query("SELECT * FROM products", function(err, results) {
@@ -57,8 +57,9 @@ connection.connect(function (err) {
                      var newStock = result.Total_Stock-quantity
                      connection.query("UPDATE products SET ? WHERE Item_ID = '" + item + "'", [
                       {Total_Stock: newStock},
+          
                      ]
-                     , function (err, result) {
+                      , function (err, result) {
                       if (err) throw err;
                       // console.log(result.affectedRows + " record(s) updated");
                     });
@@ -66,7 +67,8 @@ connection.connect(function (err) {
                    }else
                    {
                     console.log("Bummer, we don't have enough of that item in stock, please try a different quantity.")
-                }
+                  
+               }
             }
         })
     })
