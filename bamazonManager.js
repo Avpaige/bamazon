@@ -142,7 +142,7 @@ function addProduct() {
         var stock = answer.stock
         connection.query("INSERT INTO products SET ?", {
             Product_Name: newProd,
-            Departmment_Name: newDept,
+            Department_Name: newDept,
             Price: price,
             Total_Stock: stock
         }, function (err, results){

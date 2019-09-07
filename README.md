@@ -1,5 +1,10 @@
 # bamazon
 Inventory System to order prodcuts as a customer and manage them as a manager.
+
+
+To begin, run command: npm install
+Use schema.sql to set up base database with starter products
+This will provide all necessary dependencies 
  
 Run command: node bamazonCustomer.js
 to: 
